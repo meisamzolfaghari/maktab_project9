@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<hibernate-configuration xmlns="http://www.hibernate.org/xsd/hibernate-configuration">
+    <session-factory>
+        <property name="show_sql">false</property>
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
+        <property name="hibernate.connection.url">
+            jdbc:mysql://localhost/project9article?createDatabaseIfNotExist=true
+        </property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <mapping class="ir.maktab.java32.projects.articleapp.entities.Article"/>
+        <mapping class="ir.maktab.java32.projects.articleapp.entities.Category"/>
+        <mapping class="ir.maktab.java32.projects.articleapp.entities.Role"/>
+        <mapping class="ir.maktab.java32.projects.articleapp.entities.Tag"/>
+        <mapping class="ir.maktab.java32.projects.articleapp.entities.User"/>
+
+    </session-factory>
+</hibernate-configuration>
