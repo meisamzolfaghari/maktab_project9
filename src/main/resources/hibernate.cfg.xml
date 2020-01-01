@@ -12,11 +12,11 @@
         </property>
         <property name="hibernate.hbm2ddl.auto">update</property>
 
-        <mapping class="ir.maktab.java32.projects.articleapp.entities.Article"/>
-        <mapping class="ir.maktab.java32.projects.articleapp.entities.Category"/>
-        <mapping class="ir.maktab.java32.projects.articleapp.entities.Role"/>
-        <mapping class="ir.maktab.java32.projects.articleapp.entities.Tag"/>
-        <mapping class="ir.maktab.java32.projects.articleapp.entities.User"/>
+        <mapping class="ir.maktab.hibernate.projects.article.entities.Article"/>
+        <mapping class="ir.maktab.hibernate.projects.article.entities.Category"/>
+        <mapping class="ir.maktab.hibernate.projects.article.entities.Role"/>
+        <mapping class="ir.maktab.hibernate.projects.article.entities.Tag"/>
+        <mapping class="ir.maktab.hibernate.projects.article.entities.User"/>
 
     </session-factory>
 </hibernate-configuration>
