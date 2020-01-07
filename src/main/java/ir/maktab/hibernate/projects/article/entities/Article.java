@@ -33,15 +33,36 @@ public class Article {
     private boolean isPublished;
 
     @ManyToOne
-    @ToString.Exclude
     private User user;
 
-    @ManyToMany(mappedBy = "articles" , fetch = FetchType.EAGER)
-    @ToString.Exclude
+    @ManyToOne
     private Category category;
 
     @ManyToMany(mappedBy = "articles" , fetch = FetchType.EAGER)
     @ToString.Exclude
     List<Tag> tags = new ArrayList<>();
 
+    public Article(String title, String brief, String content, Date createDate, boolean isPublished, User user, Category category, List<Tag> tags) {
+        this.title = title;
+        this.brief = brief;
+        this.content = content;
+        this.createDate = createDate;
+        this.isPublished = isPublished;
+        this.user = user;
+        this.category = category;
+        this.tags = tags;
+    }
+
+    public Article(String title, String brief, String content, Date createDate, Date lastUpdateDate, Date publishDate, boolean isPublished, User user, Category category, List<Tag> tags) {
+        this.title = title;
+        this.brief = brief;
+        this.content = content;
+        this.createDate = createDate;
+        this.lastUpdateDate = lastUpdateDate;
+        this.publishDate = publishDate;
+        this.isPublished = isPublished;
+        this.user = user;
+        this.category = category;
+        this.tags = tags;
+    }
 }

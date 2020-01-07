@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -33,10 +35,10 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "user" , fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     @ToString.Exclude
     private List<Article> articles = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.EAGER , mappedBy = "users")
-    @ToString.Exclude
+    @ManyToMany
     private List<Role> roles = new ArrayList<>();
 }

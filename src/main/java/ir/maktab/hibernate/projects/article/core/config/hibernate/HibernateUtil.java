@@ -10,7 +10,7 @@ public class HibernateUtil {
     private static Session session;
 
     static {
-        sessionFactory = new Configuration().configure().buildSessionFactory();
+        sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
         session = sessionFactory.openSession();
     }
 

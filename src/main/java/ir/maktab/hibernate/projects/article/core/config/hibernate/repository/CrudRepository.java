@@ -11,10 +11,11 @@ public abstract class CrudRepository<Entity, ID extends Serializable> {
 
     protected abstract Class<Entity> getEntityClass();
 
-    public void save(Entity entity) {
+    public ID save(Entity entity) {
         getSession().beginTransaction();
-        getSession().save(entity);
+        ID id = (ID) getSession().save(entity);
         getSession().getTransaction().commit();
+        return id;
     }
 
     public void update(Entity entity) {

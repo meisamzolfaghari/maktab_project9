@@ -3,6 +3,7 @@ package ir.maktab.hibernate.projects.article.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ public class Role {
 
     private String title;
 
-    @OneToMany
+    @ManyToMany(mappedBy = "roles" , fetch = FetchType.EAGER)
+    @ToString.Exclude
     private List<User> users = new ArrayList<>();
+
 }
