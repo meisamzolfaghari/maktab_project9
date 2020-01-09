@@ -29,7 +29,7 @@ public class Tags {
         if (tags.isEmpty()) return;
 
         System.out.println("------------------------------------------------------------------------------------"
-                + "                                All Tags");
+                + "\n                                All Tags");
         tags.forEach(tag -> System.out.println(
                 ""
                         + "------------------------------------------------------------------------------------"

@@ -17,7 +17,7 @@ public class UnPublishArticleUseCaseImpl implements UnPublishArticleUseCase {
             return null;
         }
 
-        if (articleForUnPublish.isPublished()) {
+        if (!articleForUnPublish.isPublished()) {
             System.out.println("\t\u274c UnPublish failed! This Article is Already Unpublished.\n");
             return null;
         }
@@ -30,7 +30,7 @@ public class UnPublishArticleUseCaseImpl implements UnPublishArticleUseCase {
         articleRepository.update(articleForUnPublish);
         unpublishedArticle = articleRepository.findById(articleForUnPublish.getId());
 
-        if (!unpublishedArticle.isPublished() && unpublishedArticle.getPublishDate().equals(currentDate))
+        if (!unpublishedArticle.isPublished() && unpublishedArticle.getPublishDate() == null)
             System.out.println("\t\u2714 Article successfully Unpublished.\n");
         else
             System.out.println("\t\u274c UnPublish failed!\n");

@@ -12,6 +12,7 @@ public class DeleteArticleUseCaseImpl implements DeleteArticleUseCase {
         }
 
         articleRepository.remove(articleForDelete);
+
         if (articleRepository.findById(articleForDelete.getId()) == null) {
             System.out.println("\t\u2714 Article successfully Deleted.\n");
             return true;
