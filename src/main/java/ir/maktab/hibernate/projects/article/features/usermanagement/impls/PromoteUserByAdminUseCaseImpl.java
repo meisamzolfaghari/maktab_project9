@@ -22,8 +22,10 @@ public class PromoteUserByAdminUseCaseImpl implements PromoteUserByAdminUseCase 
         FindRoleByTitleUseCase findRoleByTitleUseCase = new FindRoleByTitleUseCaseImpl();
 
         //check not to promote admin
-        if (userRoles.contains(findRoleByTitleUseCase.find(AllRoles.admin.name())))
+        if (userRoles.contains(findRoleByTitleUseCase.find(AllRoles.admin.name()))) {
+            System.out.println("\t\u274c Failed to Promote To Manager!\n");
             return false;
+        }
 
         //check admin is logged in
         User loginUser = AuthenticationService.getInstance().getLoginUser();
