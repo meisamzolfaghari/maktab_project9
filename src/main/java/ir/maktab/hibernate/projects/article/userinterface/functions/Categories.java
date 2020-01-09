@@ -15,10 +15,10 @@ public class Categories {
 
         if (categories.isEmpty()) return null;
 
-        Integer id;
+        Long id;
 
         System.out.print("\t\u29bf ID : ");
-        id = in.nextInt();
+        id = in.nextLong();
         for (Category category : categories)
             if (id.equals(category.getId()))
                 return category;
