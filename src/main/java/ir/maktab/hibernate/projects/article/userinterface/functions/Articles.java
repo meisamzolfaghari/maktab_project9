@@ -14,7 +14,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Articles {
-    private static Scanner in = new Scanner(System.in);
+    private static Scanner in1 = new Scanner(System.in);
+    private static Scanner in2 = new Scanner(System.in);
 
     public static Article choose(List<Article> articles) {
 
@@ -23,7 +24,7 @@ public class Articles {
         Long id;
 
         System.out.print("\t\u29bf ID : ");
-        id = in.nextLong();
+        id = in2.nextLong();
 
         for (Article article : articles)
             if (id.equals(article.getId()))
@@ -85,26 +86,27 @@ public class Articles {
                         + "\n    Publish Date= " + article.getPublishDate()
                         + "\n    Publish Status= '" + publishStatus
                         + "'\n    User= '" + article.getUser().getUsername()
-                        + "'\n------------------------------------------------------------------------------------");
+                        + "'\n    Tags= " + article.getTags()
+                        + "\n------------------------------------------------------------------------------------");
     }
 
     public static String takeTitle() {
         System.out.print("\t\u29bf Title >>> ");
-        String title = in.nextLine();
+        String title = in1.nextLine();
 
         return title;
     }
 
     public static String takeBrief() {
         System.out.print("\t\u29bf Brief >>> ");
-        String brief = in.nextLine();
+        String brief = in1.nextLine();
 
         return brief;
     }
 
     public static String takeContent() {
         System.out.print("\t\u29bf Content >>> ");
-        String content = in.nextLine();
+        String content = in1.nextLine();
 
         return content;
     }
@@ -115,7 +117,7 @@ public class Articles {
 
     public static Boolean takePublishStatus() {
         System.out.print("\t\u29bf do yo want to publish?(y for Yes and anything for No): ");
-        if (in.next().charAt(0) == 'y')
+        if (in2.next().charAt(0) == 'y')
             return true;
         return false;
     }
@@ -147,8 +149,8 @@ public class Articles {
             if (chosenTag != null)
                 chosenTags.add(chosenTag);
             else continue;
-            System.out.println("\t\u29bf Do You Want to Add more Tags(y for yes and anything else for No): ");
-            if (in.next().charAt(0) != 'y')
+            System.out.print("\t\u29bf Do You Want to Add more Tags(y for yes and anything else for No): ");
+            if (in2.next().charAt(0) != 'y')
                 break;
         }
 
@@ -157,21 +159,21 @@ public class Articles {
 
     public static String takeNewTitle() {
         System.out.print("\t\u29bf New Title >>> ");
-        String newTitle = in.nextLine();
+        String newTitle = in1.nextLine();
 
         return newTitle;
     }
 
     public static String takeNewBrief() {
         System.out.print("\t\u29bf New Brief >>> ");
-        String newBrief = in.nextLine();
+        String newBrief = in1.nextLine();
 
         return newBrief;
     }
 
     public static String takeNewContent() {
         System.out.print("\t\u29bf New Content >>> ");
-        String newContent = in.nextLine();
+        String newContent = in1.nextLine();
 
         return newContent;
     }

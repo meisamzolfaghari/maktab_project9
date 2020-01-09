@@ -3,6 +3,7 @@ package ir.maktab.hibernate.projects.article.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -19,7 +20,8 @@ public class Tag {
 
     private String title;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "tags" , fetch = FetchType.EAGER)
+    @ToString.Exclude
     List<Article> articles = new ArrayList<>();
 
 }

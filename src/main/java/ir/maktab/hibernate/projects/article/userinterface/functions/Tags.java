@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Tags {
-    private static Scanner in = new Scanner(System.in);
+    private static Scanner in1 = new Scanner(System.in);
+    private static Scanner in2 = new Scanner(System.in);
 
 
     public static Tag choose(List<Tag> tags) {
@@ -15,7 +16,7 @@ public class Tags {
         Long id;
 
         System.out.print("\t\u29bf ID : ");
-        id = in.nextLong();
+        id = in2.nextLong();
         for (Tag tag : tags)
             if (id.equals(tag.getId()))
                 return tag;
@@ -39,7 +40,7 @@ public class Tags {
 
     public static String takeTitle() {
         System.out.print("\t\u29bf Title to Find : ");
-        String title = in.nextLine();
+        String title = in1.nextLine();
         return title;
     }
 

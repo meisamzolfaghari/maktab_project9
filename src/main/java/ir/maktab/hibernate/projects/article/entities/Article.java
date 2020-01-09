@@ -38,8 +38,7 @@ public class Article {
     @ManyToOne
     private Category category;
 
-    @ManyToMany(mappedBy = "articles" , fetch = FetchType.EAGER)
-    @ToString.Exclude
+    @ManyToMany
     List<Tag> tags = new ArrayList<>();
 
     public Article(String title, String brief, String content, Date createDate, boolean isPublished, User user, Category category, List<Tag> tags) {
