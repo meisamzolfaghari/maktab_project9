@@ -8,9 +8,15 @@ import ir.maktab.hibernate.projects.article.features.usermanagement.usecases.Cha
 public class ChangeNationalCodeUseCaseImpl implements ChangeNationalCodeUseCase {
     @Override
     public User change(String newNationalCode) {
-        if (newNationalCode == null || newNationalCode.isEmpty()) return null;
+        if (newNationalCode == null || newNationalCode.isEmpty()) {
+            System.out.println("\t\u274c Failed to Edit National Code! New National Code Error.\n");
+            return null;
+        }
         User loginUser = AuthenticationService.getInstance().getLoginUser();
-        if (loginUser == null) return null;
+        if (loginUser == null) {
+            System.out.println("\t\u274c Failed to Edit National Code! No User Logged In Error.\n");
+            return null;
+        }
 
         loginUser.setNationalCode(newNationalCode);
 

@@ -19,8 +19,10 @@ public class FindAllArticleToPublishByManagerUseCaseImpl implements FindAllArtic
         User loginUser = AuthenticationService.getInstance().getLoginUser();
         FindRoleByTitleUseCase findRoleByTitleUseCase = new FindRoleByTitleUseCaseImpl();
         if (loginUser == null || !loginUser.getRoles()
-                .contains(findRoleByTitleUseCase.find(AllRoles.manager.name())))
+                .contains(findRoleByTitleUseCase.find(AllRoles.manager.name()))) {
+            System.out.println("\t\u274c Failed to Find Articles! Access is For Manager.\n");
             return new ArrayList<>();
+        }
 
         return articleRepository.findAll()
                 .stream()

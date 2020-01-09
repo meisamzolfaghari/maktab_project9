@@ -11,7 +11,10 @@ import java.util.stream.Collectors;
 public class FindCategoryByTitleUseCaseImpl implements FindCategoryByTitleUseCase {
     @Override
     public List<Category> list(String title) {
-        if (title == null || title.isEmpty()) return new ArrayList<>();
+        if (title == null || title.isEmpty()) {
+            System.out.println("\t\u274c Failed to Find Category! Title Error.\n");
+            return new ArrayList<>();
+        }
 
         List<Category> categories = categoryRepository.findAll();
         if (categories.isEmpty()) return categories;

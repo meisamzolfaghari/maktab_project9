@@ -15,23 +15,31 @@ import java.util.List;
 public class PromoteUserByAdminUseCaseImpl implements PromoteUserByAdminUseCase {
     @Override
     public Boolean promote(User user) {
-        if (user == null || user.getRoles().isEmpty()) return false;
+        if (user == null || user.getRoles().isEmpty()) {
+            System.out.println("\t\u274c Failed to Promote User! User Error.\n");
+            return false;
+        }
         List<Role> userRoles = user.getRoles();
-        if (userRoles.isEmpty()) return false;
+        if (userRoles.isEmpty()) {
+            System.out.println("\t\u274c Failed to Promote User! User has No Roles Error.\n");
+            return false;
+        }
 
         FindRoleByTitleUseCase findRoleByTitleUseCase = new FindRoleByTitleUseCaseImpl();
 
         //check not to promote admin
         if (userRoles.contains(findRoleByTitleUseCase.find(AllRoles.admin.name()))) {
-            System.out.println("\t\u274c Failed to Promote To Manager!\n");
+            System.out.println("\t\u274c Failed to Promote User! Admin Can't be Promoted.\n");
             return false;
         }
 
         //check admin is logged in
         User loginUser = AuthenticationService.getInstance().getLoginUser();
         if (loginUser == null ||
-                !loginUser.getRoles().contains(findRoleByTitleUseCase.find(AllRoles.admin.name())))
+                !loginUser.getRoles().contains(findRoleByTitleUseCase.find(AllRoles.admin.name()))) {
+            System.out.println("\t\u274c Failed to Promote User! You Are not Admin Error.\n");
             return false;
+        }
 
         //manager user can't be promoted
         if (userRoles.size() == 2

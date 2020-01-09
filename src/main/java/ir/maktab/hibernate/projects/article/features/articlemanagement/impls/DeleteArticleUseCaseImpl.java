@@ -6,7 +6,10 @@ import ir.maktab.hibernate.projects.article.features.articlemanagement.usecases.
 public class DeleteArticleUseCaseImpl implements DeleteArticleUseCase {
     @Override
     public Boolean delete(Article articleForDelete) {
-        if (articleForDelete == null) return false;
+        if (articleForDelete == null) {
+            System.out.println("\t\u274c Failed to Edit Articles Brief! Article Error.\n");
+            return false;
+        }
 
         articleRepository.remove(articleForDelete);
         if (articleRepository.findById(articleForDelete.getId()) == null) {

@@ -8,8 +8,14 @@ import java.util.ArrayList;
 public class AddCategoryUseCaseImpl implements AddCategoryUseCase {
     @Override
     public Category add(String title, String description) {
-        if (title == null || title.isEmpty()) return null;
-        if (description == null || description.isEmpty()) return null;
+        if (title == null || title.isEmpty()) {
+            System.out.println("\t\u274c Failed to Add Category! Title Error.\n");
+            return null;
+        }
+        if (description == null || description.isEmpty()) {
+            System.out.println("\t\u274c Failed to Add Category! Description Error.\n");
+            return null;
+        }
 
         if (categoryRepository.findAll().stream().anyMatch(category -> category.getTitle().equals(title)
                 && category.getDescription().equals(description))) {

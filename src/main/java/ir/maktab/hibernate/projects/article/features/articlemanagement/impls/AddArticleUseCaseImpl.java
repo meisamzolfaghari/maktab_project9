@@ -14,31 +14,31 @@ public class AddArticleUseCaseImpl implements AddArticleUseCase {
     public Article add(String title, String brief, String content, Date currentDate
             , User user, Category category, List<Tag> tags) {
         if (title == null || title.isEmpty()) {
-            System.out.println("\t\u274c Failed to Add Article!\n");
+            System.out.println("\t\u274c Failed to Add Article! Title Error.\n");
             return null;
         }
         if (brief == null || brief.isEmpty()){
-            System.out.println("\t\u274c Failed to Add Article!\n");
+            System.out.println("\t\u274c Failed to Add Article!Brief Error.\n");
             return null;
         }
         if (content == null || content.isEmpty()){
-            System.out.println("\t\u274c Failed to Add Article!\n");
+            System.out.println("\t\u274c Failed to Add Article! Content Error.\n");
             return null;
         }
         if (currentDate == null){
-            System.out.println("\t\u274c Failed to Add Article!\n");
+            System.out.println("\t\u274c Failed to Add Article! Current Date Error.\n");
             return null;
         }
         if (user == null){
-            System.out.println("\t\u274c Failed to Add Article!\n");
+            System.out.println("\t\u274c Failed to Add Article! User Error.\n");
             return null;
         }
         if (category == null){
-            System.out.println("\t\u274c Failed to Add Article!\n");
+            System.out.println("\t\u274c Failed to Add Article! Category Error.\n");
             return null;
         }
         if (tags == null || tags.isEmpty()){
-            System.out.println("\t\u274c Failed to Add Article!\n");
+            System.out.println("\t\u274c Failed to Add Article! Tag Error.\n");
             return null;
         }
 

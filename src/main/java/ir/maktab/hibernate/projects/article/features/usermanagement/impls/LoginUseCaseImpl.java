@@ -8,11 +8,11 @@ public class LoginUseCaseImpl implements LoginUseCase {
     @Override
     public User login(String username, String password) {
         if (username == null || username.isEmpty()) {
-            System.out.println("\t\u274c Login failed!\n");
+            System.out.println("\t\u274c Login failed! Username Error\n");
             return null;
         }
         if (password == null || password.isEmpty()) {
-            System.out.println("\t\u274c Login failed!\n");
+            System.out.println("\t\u274c Login failed! Password Error.\n");
             return null;
         }
 

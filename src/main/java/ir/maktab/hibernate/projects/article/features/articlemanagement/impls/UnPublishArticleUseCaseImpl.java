@@ -7,22 +7,28 @@ import java.util.Date;
 
 public class UnPublishArticleUseCaseImpl implements UnPublishArticleUseCase {
     @Override
-    public Article unPublish(Article articleForPublish, Date currentDate) {
-        if (articleForPublish == null) return null;
-        if (currentDate == null) return null;
+    public Article unPublish(Article articleForUnPublish, Date currentDate) {
+        if (articleForUnPublish == null) {
+            System.out.println("\t\u274c Failed to UnPublish Article Brief! Article Error.\n");
+            return null;
+        }
+        if (currentDate == null) {
+            System.out.println("\t\u274c Failed to UnPublish Article Brief! Current Date Error.\n");
+            return null;
+        }
 
-        if (articleForPublish.isPublished()) {
+        if (articleForUnPublish.isPublished()) {
             System.out.println("\t\u274c UnPublish failed! This Article is Already Unpublished.\n");
             return null;
         }
 
         Article unpublishedArticle;
 
-        articleForPublish.setPublished(false);
-        articleForPublish.setPublishDate(null);
+        articleForUnPublish.setPublished(false);
+        articleForUnPublish.setPublishDate(null);
 
-        articleRepository.update(articleForPublish);
-        unpublishedArticle = articleRepository.findById(articleForPublish.getId());
+        articleRepository.update(articleForUnPublish);
+        unpublishedArticle = articleRepository.findById(articleForUnPublish.getId());
 
         if (!unpublishedArticle.isPublished() && unpublishedArticle.getPublishDate().equals(currentDate))
             System.out.println("\t\u2714 Article successfully Unpublished.\n");

@@ -11,7 +11,10 @@ import java.util.stream.Collectors;
 public class FindUserArticleUseCaseImpl implements FindUserArticleUseCase {
     @Override
     public List<Article> findAll(User user) {
-        if (user == null) return new ArrayList<>();
+        if (user == null){
+            System.out.println("\t\u274c Failed to Find Articles! User Error.\n");
+            return new ArrayList<>();
+        }
 
         return articleRepository.findAll()
                 .stream()

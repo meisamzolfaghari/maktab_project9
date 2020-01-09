@@ -10,9 +10,15 @@ import java.util.Date;
 public class ChangeBirthdayUseCaseImpl implements ChangeBirthdayUseCase {
     @Override
     public User change(Date newBirthday) {
-        if (newBirthday == null) return null;
+        if (newBirthday == null) {
+            System.out.println("\t\u274c Failed to Edit Birth Day! New Birthday Error.\n");
+            return null;
+        }
         User loginUser = AuthenticationService.getInstance().getLoginUser();
-        if (loginUser == null) return null;
+        if (loginUser == null) {
+            System.out.println("\t\u274c Failed to Edit Birth Day! No User Logged in Error.\n");
+            return null;
+        }
 
         loginUser.setBirthDay(newBirthday);
 

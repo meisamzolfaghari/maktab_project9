@@ -9,9 +9,18 @@ public class ChangeArticleBriefUseCaseImpl implements ChangeArticleBriefUseCase 
     @Override
     public Article change(Article articleForEdit, String newBrief , Date currentDate) {
 
-        if (articleForEdit == null) return null;
-        if (newBrief == null || newBrief.isEmpty()) return null;
-        if (currentDate == null) return null;
+        if (articleForEdit == null) {
+            System.out.println("\t\u274c Failed to Edit Articles Brief! Article Error.\n");
+            return null;
+        }
+        if (newBrief == null || newBrief.isEmpty()) {
+            System.out.println("\t\u274c Failed to Edit Articles Brief! New Brief Error.\n");
+            return null;
+        }
+        if (currentDate == null) {
+            System.out.println("\t\u274c Failed to Edit Articles Brief! Current Date Error.\n");
+            return null;
+        }
 
         articleForEdit.setBrief(newBrief);
         articleForEdit.setLastUpdateDate(currentDate);

@@ -13,21 +13,31 @@ import java.util.List;
 public class DemoteUserByAdminUseCaseImpl implements DemoteUserByAdminUseCase {
     @Override
     public Boolean demote(User user) {
-        if (user == null || user.getRoles().isEmpty()) return false;
+        if (user == null || user.getRoles().isEmpty()) {
+            System.out.println("\t\u274c Failed to Demote User! User Error.\n");
+            return false;
+        }
         List<Role> userRoles = user.getRoles();
-        if (userRoles.isEmpty()) return false;
+        if (userRoles.isEmpty()) {
+            System.out.println("\t\u274c Failed to Demote User! User has No Roles Error.\n");
+            return false;
+        }
 
         FindRoleByTitleUseCase findRoleByTitleUseCase = new FindRoleByTitleUseCaseImpl();
 
         //check not to demote admin
-        if (userRoles.contains(findRoleByTitleUseCase.find(AllRoles.admin.name())))
+        if (userRoles.contains(findRoleByTitleUseCase.find(AllRoles.admin.name()))) {
+            System.out.println("\t\u274c Failed to Demote User! Admin can't be Demoted.\n");
             return false;
+        }
 
         //check admin is logged in
         User loginUser = AuthenticationService.getInstance().getLoginUser();
         if (loginUser == null ||
-                !loginUser.getRoles().contains(findRoleByTitleUseCase.find(AllRoles.admin.name())))
+                !loginUser.getRoles().contains(findRoleByTitleUseCase.find(AllRoles.admin.name()))) {
+            System.out.println("\t\u274c Failed to Demote User! You Are not Admin Error.\n");
             return false;
+        }
 
         //writer only user can't be demoted
         if (userRoles.size() == 1

@@ -8,9 +8,15 @@ import ir.maktab.hibernate.projects.article.features.usermanagement.usecases.IsU
 public class ChangeUsernameUseCaseImpl implements ChangeUsernameUseCase {
     @Override
     public User change(String newUsername) {
-        if (newUsername == null || newUsername.isEmpty()) return null;
+        if (newUsername == null || newUsername.isEmpty()) {
+            System.out.println("\t\u274c Failed to Edit Username! New Username Error.\n");
+            return null;
+        }
         User loginUser = AuthenticationService.getInstance().getLoginUser();
-        if (loginUser == null) return null;
+        if (loginUser == null) {
+            System.out.println("\t\u274c Failed to Edit Username! No User Logged In Error.\n");
+            return null;
+        }
 
         IsUniqueUsernameUseCase isUniqueUsernameUseCase
                 = new IsUniqueUsernameUseCaseImpl();

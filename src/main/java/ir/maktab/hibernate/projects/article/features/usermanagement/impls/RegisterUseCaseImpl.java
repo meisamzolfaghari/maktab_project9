@@ -15,22 +15,25 @@ public class RegisterUseCaseImpl implements RegisterUseCase {
     @Override
     public User register(String username, String nationalCode, Date birthday) {
         if (username == null || username.isEmpty()){
-            System.out.println("\t\u274c Register Failed!\n");
+            System.out.println("\t\u274c Register Failed! Username Error.\n");
             return null;
         }
         if (nationalCode == null || nationalCode.isEmpty()){
-            System.out.println("\t\u274c Register Failed!\n");
+            System.out.println("\t\u274c Register Failed! National Code Error.\n");
             return null;
         }
         if (birthday == null) {
-            System.out.println("\t\u274c Register Failed!\n");
+            System.out.println("\t\u274c Register Failed! Birthday Error.\n");
             return null;
         }
 
         FindRoleByTitleUseCase findRoleByTitleUseCase
                 = new FindRoleByTitleUseCaseImpl();
         Role role = findRoleByTitleUseCase.find(AllRoles.writer.name());
-        if (role == null) return null;
+        if (role == null) {
+            System.out.println("\t\u274c Failed to Promote User! User there is not Writer Role in Database Error.\n");
+            return null;
+        }
 
         User userToAdd = new User(null, username, nationalCode, birthday
                 , nationalCode, new ArrayList<>(), new ArrayList<>(Arrays.asList(role)));

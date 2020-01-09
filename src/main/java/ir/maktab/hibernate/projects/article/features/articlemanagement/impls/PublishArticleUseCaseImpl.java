@@ -8,8 +8,14 @@ import java.util.Date;
 public class PublishArticleUseCaseImpl implements PublishArticleUseCase {
     @Override
     public Article publish(Article articleForPublish, Date currentDate) {
-        if (articleForPublish == null) return null;
-        if (currentDate == null) return null;
+        if (articleForPublish == null){
+            System.out.println("\t\u274c Failed to Publish Article Brief! Article Error.\n");
+            return null;
+        }
+        if (currentDate == null) {
+            System.out.println("\t\u274c Failed to Publish Article Brief! Current Date Error.\n");
+            return null;
+        }
 
         if (articleForPublish.isPublished()) {
             System.out.println("\t\u274c publish failed! you have Already published this Article.\n");

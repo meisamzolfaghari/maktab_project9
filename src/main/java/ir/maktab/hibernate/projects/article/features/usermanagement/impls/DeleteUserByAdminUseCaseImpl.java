@@ -10,7 +10,7 @@ public class DeleteUserByAdminUseCaseImpl implements DeleteUserByAdminUseCase {
     @Override
     public Boolean delete(User user) {
         if (userRepository.findById(user.getId()) == null) {
-            System.out.println("\t\u274c Delete User Failed!\n");
+            System.out.println("\t\u274c Delete User Failed! User Error.\n");
             return false;
         }
         if (user.getRoles().contains(new FindRoleByTitleUseCaseImpl().find(AllRoles.admin.name()))) {

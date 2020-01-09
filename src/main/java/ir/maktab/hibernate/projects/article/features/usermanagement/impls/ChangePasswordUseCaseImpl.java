@@ -7,9 +7,15 @@ import ir.maktab.hibernate.projects.article.features.usermanagement.usecases.Cha
 public class ChangePasswordUseCaseImpl implements ChangePasswordUseCase {
     @Override
     public User change(String newPassword) {
-        if (newPassword == null || newPassword.isEmpty()) return null;
+        if (newPassword == null || newPassword.isEmpty()) {
+            System.out.println("\t\u274c Failed to Change Password! New Password Error.\n");
+            return null;
+        }
         User loginUser = AuthenticationService.getInstance().getLoginUser();
-        if (loginUser == null) return null;
+        if (loginUser == null) {
+            System.out.println("\t\u274c Failed to Change Password! No User Logged In Error.\n");
+            return null;
+        }
 
         loginUser.setPassword(newPassword);
 

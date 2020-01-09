@@ -19,8 +19,10 @@ public class FindAllArticleByAdminUseCaseImpl implements FindAllArticleByAdminUs
         User loginUser = AuthenticationService.getInstance().getLoginUser();
         FindRoleByTitleUseCase findRoleByTitleUseCase = new FindRoleByTitleUseCaseImpl();
         if (loginUser == null || !loginUser.getRoles()
-                .contains(findRoleByTitleUseCase.find(AllRoles.admin.name())))
+                .contains(findRoleByTitleUseCase.find(AllRoles.admin.name()))) {
+            System.out.println("\t\u274c Failed to Find Articles! Access is just For Admin.\n");
             return new ArrayList<>();
+        }
 
         return articleRepository.findAll()
                 .stream()

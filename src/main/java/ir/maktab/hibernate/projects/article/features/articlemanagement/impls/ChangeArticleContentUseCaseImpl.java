@@ -10,9 +10,18 @@ public class ChangeArticleContentUseCaseImpl implements ChangeArticleContentUseC
     public Article change(Article articleForEdit, String newContent , Date currentDate) {
 
 
-        if (articleForEdit == null) return null;
-        if (newContent == null || newContent.isEmpty()) return null;
-        if (currentDate == null) return null;
+        if (articleForEdit == null) {
+            System.out.println("\t\u274c Failed to Edit Articles Brief! Article Error.\n");
+            return null;
+        }
+        if (newContent == null || newContent.isEmpty()) {
+            System.out.println("\t\u274c Failed to Edit Articles Brief! New Content Error.\n");
+            return null;
+        }
+        if (currentDate == null){
+            System.out.println("\t\u274c Failed to Edit Articles Brief! Current Date Error.\n");
+            return null;
+        }
 
         articleForEdit.setContent(newContent);
         articleForEdit.setLastUpdateDate(currentDate);

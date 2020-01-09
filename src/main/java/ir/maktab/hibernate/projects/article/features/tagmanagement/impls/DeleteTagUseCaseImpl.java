@@ -7,7 +7,10 @@ public class DeleteTagUseCaseImpl implements DeleteTagUseCase {
 
     @Override
     public Boolean delete(Tag tagToDelete) {
-        if (tagToDelete == null) return false;
+        if (tagToDelete == null) {
+            System.out.println("\t\u274c Failed to Delete Tag! Tag Error.\n");
+            return false;
+        }
         tagRepository.remove(tagToDelete);
 
         if (!tagRepository.findAll().contains(tagToDelete)) {

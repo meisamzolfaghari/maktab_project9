@@ -9,9 +9,18 @@ public class ChangeArticleTitleUseCaseImpl implements ChangeArticleTitleUseCase 
     @Override
     public Article change(Article articleForEdit , String newTitle , Date currentDate) {
 
-        if (articleForEdit == null) return null;
-        if (newTitle == null || newTitle.isEmpty()) return null;
-        if (currentDate == null) return null;
+        if (articleForEdit == null) {
+            System.out.println("\t\u274c Failed to Edit Articles Brief! Article Error.\n");
+            return null;
+        }
+        if (newTitle == null || newTitle.isEmpty()) {
+            System.out.println("\t\u274c Failed to Edit Articles Brief! New Title Error.\n");
+            return null;
+        }
+        if (currentDate == null) {
+            System.out.println("\t\u274c Failed to Edit Articles Brief! Current Date Error.\n");
+            return null;
+        }
 
         articleForEdit.setTitle(newTitle);
         articleForEdit.setLastUpdateDate(currentDate);

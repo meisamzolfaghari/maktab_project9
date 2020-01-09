@@ -6,11 +6,15 @@ import ir.maktab.hibernate.projects.article.features.categorymanagement.usecases
 public class DeleteCategoryUseCaseImpl implements DeleteCategoryUseCase {
     @Override
     public Boolean delete(Category categoryToDelete) {
-        if (categoryToDelete == null) return false;
+        if (categoryToDelete == null) {
+            System.out.println("\t\u274c Failed to Delete Category! Category Error.\n");
+            return false;
+        }
         if (!categoryRepository.findAll().contains(categoryToDelete)){
             System.out.println("\t\u274c Failed to Delete Category! This Category doesn't Exist.\n");
             return false;
         }
+
         categoryRepository.remove(categoryToDelete);
         Category deletedCategory = categoryRepository.findById(categoryToDelete.getId());
         if (deletedCategory == null) {

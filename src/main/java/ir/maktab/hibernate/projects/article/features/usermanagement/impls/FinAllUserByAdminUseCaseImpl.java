@@ -15,8 +15,10 @@ public class FinAllUserByAdminUseCaseImpl implements FindAllUserByAdminUseCase {
 
         User loginUser = AuthenticationService.getInstance().getLoginUser();
         if (loginUser == null ||
-                !loginUser.getRoles().contains(new FindRoleByTitleUseCaseImpl().find(AllRoles.admin.name())))
+                !loginUser.getRoles().contains(new FindRoleByTitleUseCaseImpl().find(AllRoles.admin.name()))) {
+            System.out.println("\t\u274c Failed to Find User! There is no User Error.\n");
             return new ArrayList<>();
+        }
 
         return userRepository.findAll();
     }
