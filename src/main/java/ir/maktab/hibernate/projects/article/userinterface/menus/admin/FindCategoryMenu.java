@@ -1,6 +1,7 @@
 package ir.maktab.hibernate.projects.article.userinterface.menus.admin;
 
 import ir.maktab.hibernate.projects.article.core.Actions;
+import ir.maktab.hibernate.projects.article.core.share.AuthenticationService;
 import ir.maktab.hibernate.projects.article.userinterface.functions.Categories;
 import ir.maktab.hibernate.projects.article.userinterface.functions.Users;
 import ir.maktab.hibernate.projects.article.userinterface.menus.Menu;
@@ -17,8 +18,8 @@ public class FindCategoryMenu extends Menu {
     private List<Category> categories;
 
     public FindCategoryMenu(List<Category> categories) {
-        super();
         this.categories = categories;
+        setActions();
     }
 
     @Override

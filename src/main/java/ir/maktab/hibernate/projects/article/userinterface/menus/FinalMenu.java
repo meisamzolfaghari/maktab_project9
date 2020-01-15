@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class FinalMenu extends Menu {
 
     public FinalMenu() {
-        super();
+        setActions();
     }
 
     @Override

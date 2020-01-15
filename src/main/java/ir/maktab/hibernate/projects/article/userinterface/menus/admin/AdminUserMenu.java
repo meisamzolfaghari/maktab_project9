@@ -20,7 +20,7 @@ import java.util.List;
 public class AdminUserMenu extends Menu {
 
     public AdminUserMenu() {
-        super();
+        setActions();
     }
 
     @Override
@@ -52,8 +52,7 @@ public class AdminUserMenu extends Menu {
             if (command.equals(Actions.choose.name())) {
                 chosenUser = Users.choose(users);
                 if (chosenUser != null) {
-                    Menu menu = new AdminChooseUserMenu(chosenUser);
-                    menu.execute();
+                    new AdminChooseUserMenu(chosenUser).execute();
                 }
             } else if (command.equals(Actions.promote.name())) {
                 chosenUser = Users.choose(users);

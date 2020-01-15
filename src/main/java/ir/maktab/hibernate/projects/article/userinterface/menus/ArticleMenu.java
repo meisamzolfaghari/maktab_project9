@@ -1,14 +1,12 @@
 package ir.maktab.hibernate.projects.article.userinterface.menus;
 
 import ir.maktab.hibernate.projects.article.core.Actions;
-import ir.maktab.hibernate.projects.article.core.AllRoles;
-import ir.maktab.hibernate.projects.article.userinterface.functions.Articles;
-import ir.maktab.hibernate.projects.article.userinterface.functions.Users;
-import ir.maktab.hibernate.projects.article.userinterface.menus.manager.ManagerChoosePublishArticleMenu;
 import ir.maktab.hibernate.projects.article.entities.Article;
 import ir.maktab.hibernate.projects.article.features.articlemanagement.impls.FindAllPublishedArticleUseCaseImpl;
 import ir.maktab.hibernate.projects.article.features.articlemanagement.usecases.FindAllPublishedArticleUseCase;
-import ir.maktab.hibernate.projects.article.features.rolemanagement.impls.FindRoleByTitleUseCaseImpl;
+import ir.maktab.hibernate.projects.article.userinterface.functions.Articles;
+import ir.maktab.hibernate.projects.article.userinterface.functions.Users;
+import ir.maktab.hibernate.projects.article.userinterface.menus.manager.ManagerChoosePublishArticleMenu;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +15,7 @@ import java.util.List;
 public class ArticleMenu extends Menu {
 
     public ArticleMenu() {
-        super();
+        setActions();
     }
 
     @Override
@@ -48,19 +46,14 @@ public class ArticleMenu extends Menu {
                 if (chosenArticle != null) {
                     if (loginUser != null) {
                         if (chosenArticle.getUser().equals(loginUser)) {
-                            Menu menu = new UserChooseArticleMenu(chosenArticle);
-                            menu.execute();
-                        } else if (loginUser.getRoles()
-                                .contains(new FindRoleByTitleUseCaseImpl()
-                                        .find(AllRoles.manager.name()))) {
-                            Menu menu = new ManagerChoosePublishArticleMenu(chosenArticle);
-                            menu.execute();
+                            new UserChooseArticleMenu(chosenArticle).execute();
+                        } else if (Users.isManager(loginUser)) {
+                            new ManagerChoosePublishArticleMenu(chosenArticle).execute();
                         }
+                    } else {
+                        Articles.displayShortVersion(chosenArticle);
+                        new FinalMenu().execute();
                     }
-                } else {
-                    Articles.displayShortVersion(chosenArticle);
-                    Menu menu = new FinalMenu();
-                    menu.execute();
                 }
             }
         }

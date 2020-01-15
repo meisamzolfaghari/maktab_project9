@@ -17,7 +17,7 @@ import java.util.Arrays;
 public class EditProfileMenu extends Menu {
 
     public EditProfileMenu() {
-        super();
+        setActions();
     }
 
     @Override

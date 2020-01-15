@@ -4,9 +4,9 @@ import ir.maktab.hibernate.projects.article.core.AllRoles;
 import ir.maktab.hibernate.projects.article.core.share.AuthenticationService;
 import ir.maktab.hibernate.projects.article.entities.Role;
 import ir.maktab.hibernate.projects.article.entities.User;
-import ir.maktab.hibernate.projects.article.features.rolemanagement.impls.FindRoleByTitleUseCaseImpl;
-import ir.maktab.hibernate.projects.article.features.rolemanagement.usecases.FindRoleByTitleUseCase;
 import ir.maktab.hibernate.projects.article.features.usermanagement.usecases.DemoteUserByAdminUseCase;
+import ir.maktab.hibernate.projects.article.userinterface.functions.Roles;
+import ir.maktab.hibernate.projects.article.userinterface.functions.Users;
 
 import java.util.List;
 
@@ -23,36 +23,31 @@ public class DemoteUserByAdminUseCaseImpl implements DemoteUserByAdminUseCase {
             return false;
         }
 
-        FindRoleByTitleUseCase findRoleByTitleUseCase = new FindRoleByTitleUseCaseImpl();
-
         //check not to demote admin
-        if (userRoles.contains(findRoleByTitleUseCase.find(AllRoles.admin.name()))) {
+        if (Users.isAdmin(user)) {
             System.out.println("\t\u274c Failed to Demote User! Admin can't be Demoted.\n");
             return false;
         }
 
         //check admin is logged in
         User loginUser = AuthenticationService.getInstance().getLoginUser();
-        if (loginUser == null ||
-                !loginUser.getRoles().contains(findRoleByTitleUseCase.find(AllRoles.admin.name()))) {
-            System.out.println("\t\u274c Failed to Demote User! You Are not Admin Error.\n");
+        if (loginUser == null || !Users.isAdmin(loginUser)) {
+            System.out.println("\t\u274c Failed to Demote User! You Are not Admin.\n");
             return false;
         }
 
         //writer only user can't be demoted
         if (userRoles.size() == 1
-                && userRoles.contains(findRoleByTitleUseCase.find(AllRoles.writer.name()))) {
+                && Users.isWriter(user)) {
             System.out.println("\t\u274c Demote Failed! This User is just a " + AllRoles.writer.name() +
                     " and can't be Demoted More.\n");
             return false;
         }
 
-
-        userRoles.remove(findRoleByTitleUseCase.find(AllRoles.manager.name()));
+        userRoles.remove(Roles.getManagerRole());
         user.setRoles(userRoles);
         userRepository.update(user);
-        if (!userRepository.findById(user.getId()).getRoles()
-                .contains(findRoleByTitleUseCase.find(AllRoles.manager.name()))) {
+        if (!Users.isManager(userRepository.findById(user.getId()))) {
             System.out.println("\t\u2714 User Successfully Demoted to Writer.\n");
             return true;
         }

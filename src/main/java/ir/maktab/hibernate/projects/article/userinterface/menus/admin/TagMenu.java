@@ -1,9 +1,6 @@
 package ir.maktab.hibernate.projects.article.userinterface.menus.admin;
 
 import ir.maktab.hibernate.projects.article.core.Actions;
-import ir.maktab.hibernate.projects.article.userinterface.functions.Tags;
-import ir.maktab.hibernate.projects.article.userinterface.functions.Users;
-import ir.maktab.hibernate.projects.article.userinterface.menus.Menu;
 import ir.maktab.hibernate.projects.article.entities.Tag;
 import ir.maktab.hibernate.projects.article.features.tagmanagement.impls.AddTagUseCaseImpl;
 import ir.maktab.hibernate.projects.article.features.tagmanagement.impls.DeleteTagUseCaseImpl;
@@ -12,6 +9,9 @@ import ir.maktab.hibernate.projects.article.features.tagmanagement.impls.FindTag
 import ir.maktab.hibernate.projects.article.features.tagmanagement.usecases.AddTagUseCase;
 import ir.maktab.hibernate.projects.article.features.tagmanagement.usecases.DeleteTagUseCase;
 import ir.maktab.hibernate.projects.article.features.tagmanagement.usecases.FindAllTagUseCase;
+import ir.maktab.hibernate.projects.article.userinterface.functions.Tags;
+import ir.maktab.hibernate.projects.article.userinterface.functions.Users;
+import ir.maktab.hibernate.projects.article.userinterface.menus.Menu;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +20,7 @@ import java.util.List;
 public class TagMenu extends Menu {
 
     public TagMenu() {
-        super();
+        setActions();
     }
 
     @Override
@@ -47,8 +47,8 @@ public class TagMenu extends Menu {
             }
 
             if (command.equals(Actions.find.name())) {
-                Menu menu = new FindTagMenu(new FindTagByTitleUseCaseImpl().list(Tags.takeTitle()));
-                menu.execute();
+                new FindTagMenu(new FindTagByTitleUseCaseImpl()
+                        .list(Tags.takeTitle())).execute();
             } else if (command.equals(Actions.add.name())) {
                 AddTagUseCase addTagUseCase = new AddTagUseCaseImpl();
                 addTagUseCase.add(Tags.takeTitle());
@@ -60,7 +60,6 @@ public class TagMenu extends Menu {
                     deleteTagUseCase.delete(chosenTag);
                 }
             }
-
         }
     }
 

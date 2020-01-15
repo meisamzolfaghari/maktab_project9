@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class ProfileMenu extends Menu {
 
     public ProfileMenu() {
-        super();
+        setActions();
     }
 
     @Override
@@ -26,11 +26,8 @@ public class ProfileMenu extends Menu {
 
             if (command.equals(Actions.exit.name())) {
                 exit();
-            }
-
-            else if (command.equals(Actions.edit.name())) {
-                Menu menu = new EditProfileMenu();
-                menu.execute();
+            } else if (command.equals(Actions.edit.name())) {
+                new EditProfileMenu().execute();
             }
         }
     }

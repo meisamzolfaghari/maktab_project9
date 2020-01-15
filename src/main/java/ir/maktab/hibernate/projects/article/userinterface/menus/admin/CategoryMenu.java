@@ -20,7 +20,7 @@ import java.util.List;
 public class CategoryMenu extends Menu {
 
     public CategoryMenu() {
-        super();
+        setActions();
     }
 
     @Override
@@ -48,9 +48,8 @@ public class CategoryMenu extends Menu {
             }
 
             if (command.equals(Actions.find.name())) {
-                Menu menu = new FindCategoryMenu(new FindCategoryByTitleUseCaseImpl()
-                        .list(Categories.takeTitle()));
-                menu.execute();
+                new FindCategoryMenu(new FindCategoryByTitleUseCaseImpl()
+                        .list(Categories.takeTitle())).execute();
             } else if (command.equals(Actions.add.name())) {
                 AddCategoryUseCase addCategoryUseCase
                         = new AddCategoryUseCaseImpl();

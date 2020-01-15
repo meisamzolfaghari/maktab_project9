@@ -1,6 +1,7 @@
 package ir.maktab.hibernate.projects.article.userinterface.menus.admin;
 
 import ir.maktab.hibernate.projects.article.core.Actions;
+import ir.maktab.hibernate.projects.article.core.share.AuthenticationService;
 import ir.maktab.hibernate.projects.article.userinterface.functions.Users;
 import ir.maktab.hibernate.projects.article.userinterface.menus.Menu;
 import ir.maktab.hibernate.projects.article.entities.User;
@@ -19,8 +20,8 @@ public class AdminChooseUserMenu extends Menu {
     private User chosenUser;
 
     public AdminChooseUserMenu(User chosenUser) {
-        super();
         this.chosenUser = chosenUser;
+        setActions();
     }
 
     @Override

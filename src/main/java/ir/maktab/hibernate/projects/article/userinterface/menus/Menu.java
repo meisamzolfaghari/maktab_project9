@@ -10,9 +10,8 @@ public abstract class Menu {
     protected String command;
     protected List<String> actions;
 
-    public Menu(){
+    public Menu() {
         loginUser = AuthenticationService.getInstance().getLoginUser();
-        setActions();
     }
 
     public abstract void execute();
@@ -21,7 +20,7 @@ public abstract class Menu {
 
     protected abstract void setActions();
 
-    protected void exit(){
+    protected void exit() {
         System.out.println("\n bye bye!");
         System.exit(0);
     }

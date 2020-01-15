@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class FirstMenu extends Menu {
 
     public FirstMenu() {
-        super();
+        setActions();
     }
 
     @Override
@@ -26,23 +26,15 @@ public class FirstMenu extends Menu {
 
             if (command.equals(Actions.exit.name())) {
                 exit();
-            }
-
-            else if (command.equals(Actions.articles.name())) {
-                Menu menu = new ArticleMenu();
-                menu.execute();
-            }
-
-            else if (command.equals(Actions.login.name())) {
+            } else if (command.equals(Actions.articles.name())) {
+                new ArticleMenu().execute();
+            } else if (command.equals(Actions.login.name())) {
                 LoginUseCase loginUseCase = new LoginUseCaseImpl();
-                loginUser = loginUseCase.login(Users.takeUsername() , Users.takePassword());
+                loginUser = loginUseCase.login(Users.takeUsername(), Users.takePassword());
                 if (loginUser != null) {
-                    Menu menu = new UserMenu();
-                    menu.execute();
+                    new UserMenu().execute();
                 }
-            }
-
-            else if (command.equals(Actions.register.name())) {
+            } else if (command.equals(Actions.register.name())) {
                 RegisterUseCase registerUseCase
                         = new RegisterUseCaseImpl();
                 registerUseCase.register(Users.takeUsername()

@@ -1,14 +1,12 @@
 package ir.maktab.hibernate.projects.article.features.usermanagement.impls;
 
-import ir.maktab.hibernate.projects.article.core.AllRoles;
-import ir.maktab.hibernate.projects.article.entities.Role;
 import ir.maktab.hibernate.projects.article.entities.User;
-import ir.maktab.hibernate.projects.article.features.rolemanagement.impls.FindRoleByTitleUseCaseImpl;
-import ir.maktab.hibernate.projects.article.features.rolemanagement.usecases.FindRoleByTitleUseCase;
 import ir.maktab.hibernate.projects.article.features.usermanagement.usecases.RegisterUseCase;
+import ir.maktab.hibernate.projects.article.userinterface.functions.Roles;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 
 public class RegisterUseCaseImpl implements RegisterUseCase {
@@ -27,16 +25,13 @@ public class RegisterUseCaseImpl implements RegisterUseCase {
             return null;
         }
 
-        FindRoleByTitleUseCase findRoleByTitleUseCase
-                = new FindRoleByTitleUseCaseImpl();
-        Role role = findRoleByTitleUseCase.find(AllRoles.writer.name());
-        if (role == null) {
-            System.out.println("\t\u274c Failed to Promote User! User there is not Writer Role in Database Error.\n");
+        if (Roles.getWriterRole() == null) {
+            System.out.println("\t\u274c Failed to Promote User! there is not Writer Role in Database Error.\n");
             return null;
         }
 
         User userToAdd = new User(null, username, nationalCode, birthday
-                , nationalCode, new ArrayList<>(), new ArrayList<>(Arrays.asList(role)));
+                , nationalCode, new ArrayList<>(), new ArrayList<>(Collections.singletonList(Roles.getWriterRole())));
 
         userToAdd.setId(userRepository.save(userToAdd));
         User registeredUser = userRepository.findById(userToAdd.getId());

@@ -18,7 +18,7 @@ import java.util.List;
 public class ManagerPublishArticleMenu extends Menu {
 
     public ManagerPublishArticleMenu() {
-        super();
+        setActions();
     }
 
     @Override
@@ -51,8 +51,7 @@ public class ManagerPublishArticleMenu extends Menu {
             if (command.equals(Actions.choose.name())) {
                 chosenArticle = Articles.choose(articles);
                 if (chosenArticle != null) {
-                    Menu menu = new ManagerChoosePublishArticleMenu(chosenArticle);
-                    menu.execute();
+                    new ManagerChoosePublishArticleMenu(chosenArticle).execute();
                 }
             } else if (command.equals(Actions.publish.name())) {
                 chosenArticle = Articles.choose(articles);

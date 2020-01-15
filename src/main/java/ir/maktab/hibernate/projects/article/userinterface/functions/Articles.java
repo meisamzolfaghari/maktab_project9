@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Articles {
     private static Scanner in1 = new Scanner(System.in);
@@ -64,7 +65,8 @@ public class Articles {
                         + "'\n    Brief= '" + article.getBrief()
                         + "'\n    Content= '" + article.getContent()
                         + "'\n    User= '" + article.getUser().getUsername()
-                        + "'\n    Tags= '" + article.getTags()
+                        + "'\n    Tags= '" + article.getTags().stream().map(tag -> tag.getTitle() + ",")
+                        .collect(Collectors.joining())
                         + "'\n------------------------------------------------------------------------------------");
     }
 
@@ -86,29 +88,24 @@ public class Articles {
                         + "\n    Publish Date= " + article.getPublishDate()
                         + "\n    Publish Status= '" + publishStatus
                         + "'\n    User= '" + article.getUser().getUsername()
-                        + "'\n    Tags= " + article.getTags()
-                        + "\n------------------------------------------------------------------------------------");
+                        + "'\n    Tags= '" + article.getTags().stream().map(tag -> tag.getTitle() + ",")
+                        .collect(Collectors.joining())
+                        + "'\n------------------------------------------------------------------------------------");
     }
 
     public static String takeTitle() {
         System.out.print("\t\u29bf Title >>> ");
-        String title = in1.nextLine();
-
-        return title;
+        return in1.nextLine();
     }
 
     public static String takeBrief() {
         System.out.print("\t\u29bf Brief >>> ");
-        String brief = in1.nextLine();
-
-        return brief;
+        return in1.nextLine();
     }
 
     public static String takeContent() {
         System.out.print("\t\u29bf Content >>> ");
-        String content = in1.nextLine();
-
-        return content;
+        return in1.nextLine();
     }
 
     public static Date takeCurrentTime() {
@@ -117,9 +114,7 @@ public class Articles {
 
     public static Boolean takePublishStatus() {
         System.out.print("\t\u29bf do yo want to publish?(y for Yes and anything for No): ");
-        if (in2.next().charAt(0) == 'y')
-            return true;
-        return false;
+        return in2.next().charAt(0) == 'y';
     }
 
     public static Category takeCategory() {
@@ -159,22 +154,16 @@ public class Articles {
 
     public static String takeNewTitle() {
         System.out.print("\t\u29bf New Title >>> ");
-        String newTitle = in1.nextLine();
-
-        return newTitle;
+        return in1.nextLine();
     }
 
     public static String takeNewBrief() {
         System.out.print("\t\u29bf New Brief >>> ");
-        String newBrief = in1.nextLine();
-
-        return newBrief;
+        return in1.nextLine();
     }
 
     public static String takeNewContent() {
         System.out.print("\t\u29bf New Content >>> ");
-        String newContent = in1.nextLine();
-
-        return newContent;
+        return in1.nextLine();
     }
 }

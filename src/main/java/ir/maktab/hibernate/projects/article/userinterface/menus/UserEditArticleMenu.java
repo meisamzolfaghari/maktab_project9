@@ -1,13 +1,12 @@
 package ir.maktab.hibernate.projects.article.userinterface.menus;
 
 import ir.maktab.hibernate.projects.article.core.Actions;
-import ir.maktab.hibernate.projects.article.core.AllRoles;
-import ir.maktab.hibernate.projects.article.userinterface.functions.Articles;
-import ir.maktab.hibernate.projects.article.userinterface.functions.Users;
+import ir.maktab.hibernate.projects.article.core.share.AuthenticationService;
 import ir.maktab.hibernate.projects.article.entities.Article;
 import ir.maktab.hibernate.projects.article.features.articlemanagement.impls.*;
 import ir.maktab.hibernate.projects.article.features.articlemanagement.usecases.*;
-import ir.maktab.hibernate.projects.article.features.rolemanagement.impls.FindRoleByTitleUseCaseImpl;
+import ir.maktab.hibernate.projects.article.userinterface.functions.Articles;
+import ir.maktab.hibernate.projects.article.userinterface.functions.Users;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,8 +17,8 @@ public class UserEditArticleMenu extends Menu {
     private Article articleForEdit;
 
     public UserEditArticleMenu(Article articleForEdit) {
-        super();
         this.articleForEdit = articleForEdit;
+        setActions();
     }
 
     @Override
@@ -76,12 +75,10 @@ public class UserEditArticleMenu extends Menu {
         System.out.println("\t|  title           ---->    Edit Title.                         |");
         System.out.println("\t|  brief           ---->    Edit Brief.                         |");
         System.out.println("\t|  content         ---->    Edit Content.                       |");
-        if (loginUser.getRoles()
-                .contains(new FindRoleByTitleUseCaseImpl().find(AllRoles.manager.name()))) {
+        if (Users.isManager(loginUser)) {
             if (!articleForEdit.isPublished())
                 System.out.println("\t|  publish         ---->    Publish Article.                    |");
-            else if (articleForEdit.isPublished())
-                System.out.println("\t|  unpublish       ---->    UnPublish Article.                  |");
+            else System.out.println("\t|  unpublish       ---->    UnPublish Article.                  |");
         }
         System.out.println("\t|  back            ---->    Back to Last Menu.                  |");
         System.out.println("\t|  exit            ---->    Exit.                               |");
@@ -97,12 +94,10 @@ public class UserEditArticleMenu extends Menu {
                         , Actions.content.name()
                         , Actions.back.name()
                         , Actions.exit.name()));
-        if (loginUser.getRoles()
-                .contains(new FindRoleByTitleUseCaseImpl().find(AllRoles.manager.name()))) {
+        if (Users.isManager(loginUser)) {
             if (!articleForEdit.isPublished())
                 actions.add(Actions.publish.name());
-            else if (articleForEdit.isPublished())
-                actions.add(Actions.unpublish.name());
+            else actions.add(Actions.unpublish.name());
         }
     }
 }

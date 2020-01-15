@@ -18,7 +18,7 @@ import java.util.Arrays;
 public class UserMenu extends Menu {
 
     public UserMenu() {
-        super();
+        setActions();
     }
 
     @Override
@@ -33,34 +33,24 @@ public class UserMenu extends Menu {
             if (command.equals(Actions.exit.name())) {
                 exit();
             }
-            Menu menu;
             if (command.equals(Actions.users.name())) {
-                menu = new AdminUserMenu();
-                menu.execute();
+                new AdminUserMenu().execute();
             } else if (command.equals(Actions.tags.name())) {
-                menu = new TagMenu();
-                menu.execute();
+                new TagMenu().execute();
             } else if (command.equals(Actions.categories.name())) {
-                menu = new CategoryMenu();
-                menu.execute();
+                new CategoryMenu().execute();
             } else if (command.equals(Actions.publisharticles.name())) {
-                menu = new ManagerPublishArticleMenu();
-                menu.execute();
+                new ManagerPublishArticleMenu().execute();
             } else if (command.equals(Actions.myarticles.name())) {
-                menu = new UserArticleMenu();
-                menu.execute();
+                new UserArticleMenu().execute();
             } else if (command.equals(Actions.articles.name())) {
-                if (loginUser.getRoles()
-                        .contains(new FindRoleByTitleUseCaseImpl().find(AllRoles.admin.name()))) {
-                    menu = new AdminArticleMenu();
-                    menu.execute();
+                if (Users.isAdmin(loginUser)) {
+                    new AdminArticleMenu().execute();
                 } else {
-                    menu = new ArticleMenu();
-                    menu.execute();
+                    new ArticleMenu().execute();
                 }
             } else if (command.equals(Actions.profile.name())) {
-                menu = new ProfileMenu();
-                menu.execute();
+                new ProfileMenu().execute();
             } else if (command.equals(Actions.logout.name())) {
                 LogoutUseCase logoutUseCase = new LogoutUseCaseImpl();
                 logoutUseCase.logout();
@@ -73,19 +63,15 @@ public class UserMenu extends Menu {
         System.out.println("\t+---------------------------------------------------------------+");
         System.out.println("\t|                      User Menu                                |");
         System.out.println("\t+---------------------------------------------------------------+");
-        if (loginUser.getRoles()
-                .contains(new FindRoleByTitleUseCaseImpl().find(AllRoles.manager.name())))
-            System.out.println("\t|  publisharticles ---->    See And Publish Articles.           |");
-        else if (loginUser.getRoles()
-                .contains(new FindRoleByTitleUseCaseImpl().find(AllRoles.admin.name()))) {
+        if (Users.isAdmin(loginUser)) {
             System.out.println("\t|  articles        ---->    See and Edit all Articles.          |");
             System.out.println("\t|  users           ---->    See and Edit all Users.             |");
             System.out.println("\t|  tags            ---->    Add or Delete Tags.                 |");
             System.out.println("\t|  categories      ---->    Add or Delete Categories.           |");
-        }
+        } else if (Users.isManager(loginUser))
+            System.out.println("\t|  publisharticles ---->    See And Publish Articles.           |");
         System.out.println("\t|  myarticles      ---->    See Your Articles.                  |");
-        if (!loginUser.getRoles()
-                .contains(new FindRoleByTitleUseCaseImpl().find(AllRoles.admin.name())))
+        if (!Users.isAdmin(loginUser))
             System.out.println("\t|  articles        ---->    See All Articles.                   |");
         System.out.println("\t|  profile         ---->    See your Profile.                   |");
         System.out.println("\t|  logout          ---->    Logout.                             |");
@@ -103,14 +89,12 @@ public class UserMenu extends Menu {
                         , Actions.logout.name()
                         , Actions.exit.name()));
 
-        if (loginUser.getRoles()
-                .contains(new FindRoleByTitleUseCaseImpl().find(AllRoles.manager.name())))
-            actions.add(Actions.publisharticles.name());
-        else if (loginUser.getRoles()
-                .contains(new FindRoleByTitleUseCaseImpl().find(AllRoles.admin.name()))) {
+        if (Users.isAdmin(loginUser)) {
             actions.add(Actions.users.name());
             actions.add(Actions.tags.name());
             actions.add(Actions.categories.name());
-        }
+        } else if (Users.isManager(loginUser))
+            actions.add(Actions.publisharticles.name());
+
     }
 }

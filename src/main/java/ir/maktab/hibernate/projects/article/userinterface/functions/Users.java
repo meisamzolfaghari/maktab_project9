@@ -1,5 +1,6 @@
 package ir.maktab.hibernate.projects.article.userinterface.functions;
 
+import ir.maktab.hibernate.projects.article.core.AllRoles;
 import ir.maktab.hibernate.projects.article.entities.User;
 
 import java.text.ParseException;
@@ -58,6 +59,21 @@ public class Users {
                         + "'\n------------------------------------------------------------------------------------");
     }
 
+    public static Boolean isAdmin(User user) {
+        return user.getRoles().stream()
+                .anyMatch(role -> role.getTitle().equals(AllRoles.admin.name()));
+    }
+
+    public static Boolean isManager(User user) {
+        return user.getRoles().stream()
+                .anyMatch(role -> role.getTitle().equals(AllRoles.manager.name()));
+    }
+
+    public static Boolean isWriter(User user) {
+        return user.getRoles().stream()
+                .anyMatch(role -> role.getTitle().equals(AllRoles.writer.name()));
+    }
+
     public static String takeCommand(List<String> actions) {
         String command;
         while (true) {
@@ -75,14 +91,12 @@ public class Users {
 
     public static String takeUsername() {
         System.out.print("\t\u29bf Username: ");
-        String username = in.next();
-        return username;
+        return in.next();
     }
 
     public static String takePassword() {
         System.out.print("\t\u29bf Password: ");
-        String password = in.next();
-        return password;
+        return in.next();
     }
 
     public static Date takeBirthday() {
@@ -100,14 +114,12 @@ public class Users {
 
     public static String takeNationalCode() {
         System.out.print("\t\u29bf NationalCode: ");
-        String nationalCode = in.next();
-        return nationalCode;
+        return in.next();
     }
 
     public static String takeNewUsername() {
         System.out.print("\t\u29bf New Username >>> ");
-        String newUsername = in.next();
-        return newUsername;
+        return in.next();
     }
 
     public static String takeNewPassword() {
@@ -136,8 +148,7 @@ public class Users {
 
     public static String takeNewNationalCode() {
         System.out.print("\t\u29bf New NationalCode >>> ");
-        String newNationalCode = in.next();
-        return newNationalCode;
+        return in.next();
     }
 }
 

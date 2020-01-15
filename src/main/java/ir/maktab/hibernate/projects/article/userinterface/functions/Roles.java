@@ -1,6 +1,8 @@
 package ir.maktab.hibernate.projects.article.userinterface.functions;
 
+import ir.maktab.hibernate.projects.article.core.AllRoles;
 import ir.maktab.hibernate.projects.article.entities.Role;
+import ir.maktab.hibernate.projects.article.features.rolemanagement.impls.FindRoleByTitleUseCaseImpl;
 
 import java.util.List;
 import java.util.Scanner;
@@ -21,6 +23,18 @@ public class Roles {
 
         System.out.println("\t\u26a0 Invalid ID!\n");
         return null;
+    }
+
+    public static Role getAdminRole() {
+        return new FindRoleByTitleUseCaseImpl().find(AllRoles.admin.name());
+    }
+
+    public static Role getManagerRole() {
+        return new FindRoleByTitleUseCaseImpl().find(AllRoles.manager.name());
+    }
+
+    public static Role getWriterRole() {
+        return new FindRoleByTitleUseCaseImpl().find(AllRoles.writer.name());
     }
 
     public static void displayAll(List<Role> roles) {

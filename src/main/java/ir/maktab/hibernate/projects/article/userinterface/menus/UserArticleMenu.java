@@ -18,7 +18,7 @@ import java.util.List;
 public class UserArticleMenu extends Menu {
 
     public UserArticleMenu() {
-        super();
+        setActions();
     }
 
     @Override
@@ -47,8 +47,7 @@ public class UserArticleMenu extends Menu {
                 if (!articles.isEmpty()) {
                     Article chosenArticle = Articles.choose(articles);
                     if (chosenArticle != null) {
-                        Menu menu = new UserChooseArticleMenu(chosenArticle);
-                        menu.execute();
+                        new UserChooseArticleMenu(chosenArticle).execute();
                     }
                 } else
                     System.out.println("\t\u26A0 Add an Article First!");
@@ -57,8 +56,7 @@ public class UserArticleMenu extends Menu {
                 if (!articles.isEmpty()) {
                     Article chosenArticle = Articles.choose(articles);
                     if (chosenArticle != null) {
-                        Menu menu = new UserEditArticleMenu(chosenArticle);
-                        menu.execute();
+                        new UserEditArticleMenu(chosenArticle).execute();
                     }
                 } else
                     System.out.println("\t\u26A0 Add an Article First!");
